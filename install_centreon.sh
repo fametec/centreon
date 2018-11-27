@@ -8,6 +8,15 @@ setenforce 0
 sed -i s/SELINUX=enforcing/SELINUX=permissive/g /etc/selinux/config
 
 
+# Criar Swap
+dd if=/dev/zero of=/swap.raw bs=1M count=1024
+chmod 0600 /swap.raw
+mkswap /swap.raw
+echo '/swap.raw swap swap defaults 0 0' >> /etc/fstab
+swapon /swap.raw
+
+
+
 # Software collections repository installation
 yum install centos-release-scl
 
