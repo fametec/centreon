@@ -14,12 +14,12 @@ yum install centos-release-scl
 
 # Centreon repository
 wget http://yum.centreon.com/standard/18.10/el7/stable/noarch/RPMS/centreon-release-18.10-2.el7.centos.noarch.rpm -O /tmp/centreon-release-18.10-2.el7.centos.noarch.rpm
-yum install --nogpgcheck /tmp/centreon-release-18.10-2.el7.centos.noarch.rpm
+yum -y install --nogpgcheck /tmp/centreon-release-18.10-2.el7.centos.noarch.rpm
 
 
 
 # Installing Centreon central server with database
-yum install centreon
+yum -y install centreon
 systemctl restart mysql
 
 
