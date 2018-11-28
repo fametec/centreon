@@ -1,6 +1,9 @@
 #!/bin/bash
 #
-#
+# Script para instalar o Centreon 18.10 
+# Testado com um Standard Droplet 1GB-1CPU-25GB na DigitalOcean, 
+# Use o link https://m.do.co/c/255eab96dfbb para criar uma conta.
+# 
 
 
 # Desativando SELinux
