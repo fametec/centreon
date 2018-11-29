@@ -21,7 +21,7 @@ swapon /swap.raw
 
 
 # Software collections repository installation
-yum install centos-release-scl
+yum -y install centos-release-scl
 
 
 # Centreon repository
@@ -36,10 +36,10 @@ systemctl restart mysql
 
 
 # Installing Centreon central server without database
-# yum install centreon-base-config-centreon-engine
+# yum -y install centreon-base-config-centreon-engine
 
 # Installing MySQL on the dedicated server
-# yum install centreon-database
+# yum -y install centreon-database
 # systemctl restart mysql
 
 
