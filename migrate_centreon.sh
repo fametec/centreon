@@ -26,7 +26,7 @@ rsync -avz /var/spool/centreon/.ssh root@$IP_New_Centreon:/var/spool/centreon
 
 
 # Dump Database
-mysqldump -A > /tmp/dump.sql
+mysqldump -A --add-drop-database > /tmp/dump.sql
 
 rsync -avz /tmp/dump.sql root@$IP_New_Centreon:/tmp
 ssh root@root@$IP_New_Centreon "mysql < /tmp/dump.sql.gz"
