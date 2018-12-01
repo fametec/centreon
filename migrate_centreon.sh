@@ -24,6 +24,12 @@ rsync -avz /var/log/centreon-engine/archives/ root@$IP_New_Centreon:/var/log/cen
 rsync -avz --exclude centcore/ logs/ /var/lib/centreon root@$IP_New_Centreon:/var/lib
 rsync -avz /var/spool/centreon/.ssh root@$IP_New_Centreon:/var/spool/centreon
 
+# Plugin
+#rsync -avz /usr/lib64/nagios/plugins root@$IP_Nes_Centreon:/usr/lib64/nagios
+#rsync -avz /usr/lib/nagios/plugins root@$IP_Nes_Centreon:/usr/lib64/nagios
+#rsync -avz /usr/lib/centreon/plugins root@$IP_Nes_Centreon:/usr/lib/centreon
+
+
 
 # Dump Database
 mysqldump -A --add-drop-database > /tmp/dump.sql
