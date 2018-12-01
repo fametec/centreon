@@ -1,9 +1,18 @@
 #!/bin/bash
 #
 # Migrar Centreon 18.10 para outro Host
+# 
 #
 
 IP_New_Centreon='159.65.37.229'
+
+
+# Testar conexao SSH
+`ssh root@$IP_New_Centreon "date"`
+if [ $? -ne 0 ]; then 
+  echo "Erro na conexao SSH, verifique se a chave foi enviada para o Host..."
+  exit 1
+fi
 
 
 
