@@ -30,12 +30,13 @@ rsync -avz /var/spool/centreon/.ssh root@$IP_New_Centreon:/var/spool/centreon
 #rsync -avz /usr/lib/centreon/plugins root@$IP_Nes_Centreon:/usr/lib/centreon
 
 
-
 # Dump Database
-mysqldump -A --add-drop-database > /tmp/dump.sql
+mysqldump --add-drop-database --databases centreon > /tmp/dump_centreon.sql
+mysqldump --add-drop-database --databases centreon_storage > /tmp/dump_centreon_storage.sql
 
-rsync -avz /tmp/dump.sql root@$IP_New_Centreon:/tmp
-ssh root@root@$IP_New_Centreon "mysql < /tmp/dump.sql.gz"
+rsync -avz /tmp/dump_centreon.sql /tmp/dump_centreon_storage.sql root@$IP_New_Centreon:/tmp
+ssh root@root@$IP_New_Centreon "mysql < /tmp/dump_centreon.sql"
+ssh root@root@$IP_New_Centreon "mysql < /tmp/dump_centreon_storage.sql"
 
 # Stop mysqld
 #ssh root@$IP_New_Centreon "service mysql stop"
@@ -45,7 +46,7 @@ ssh root@root@$IP_New_Centreon "mysql < /tmp/dump.sql.gz"
 
 # If you migrate your DMBS from 5.x to 10.x, it’s necessary to execute this command on the new server :
 MVER=`ssh root@$IP_New_Centreon "mysqld -V | grep Ver | cut -d ' ' -f 4 | cut -d . -f 1"`
-if [ $MVER -eq 5 ]
+if [ $MVER -ne 5 ]
 then
   ssh root@$IP_New_Centreon "mysql_upgrade"
 fi
