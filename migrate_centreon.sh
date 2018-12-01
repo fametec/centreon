@@ -4,7 +4,7 @@
 # 
 #
 
-IP_New_Centreon='159.65.37.229'
+IP_New_Centreon='68.183.128.166'
 
 
 # Testar conexao SSH
@@ -31,12 +31,9 @@ rsync -avz /var/spool/centreon/.ssh root@$IP_New_Centreon:/var/spool/centreon
 
 
 # Dump Database
-mysqldump --add-drop-database --databases centreon > /tmp/dump_centreon.sql
-mysqldump --add-drop-database --databases centreon_storage > /tmp/dump_centreon_storage.sql
-
-rsync -avz /tmp/dump_centreon.sql /tmp/dump_centreon_storage.sql root@$IP_New_Centreon:/tmp
-ssh root@root@$IP_New_Centreon "mysql < /tmp/dump_centreon.sql"
-ssh root@root@$IP_New_Centreon "mysql < /tmp/dump_centreon_storage.sql"
+mysqldump --add-drop-database --all-databases > /tmp/dump.sql
+rsync -avz /tmp/dump.sql root@$IP_New_Centreon:/tmp
+ssh root@root@$IP_New_Centreon "mysql < /tmp/dump.sql"
 
 # Stop mysqld
 #ssh root@$IP_New_Centreon "service mysql stop"
