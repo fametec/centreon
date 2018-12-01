@@ -4,7 +4,7 @@
 # 
 #
 
-IP_New_Centreon='68.183.128.166'
+IP_New_Centreon='209.97.181.239'
 
 
 # Testar conexao SSH
@@ -53,7 +53,7 @@ fi
 #systemctl start mysqld
 
 # Upgrading Centreon
-ssh root@$IP_New_Centreon "mv /usr/share/centreon/installDir/install* /usr/share/centreon/www/install"
+ssh ssh root@$IP_New_Centreon "INSTDIR=`ls -1 /usr/share/centreon/installDir/` && mv /usr/share/centreon/installDir/$INSTDIR /usr/share/centreon/www/install"
 
 # Fonte: 
 # https://documentation.centreon.com/docs/centreon/en/latest/migration/upgradetoCentreon18.10.html
