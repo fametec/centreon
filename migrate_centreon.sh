@@ -8,7 +8,7 @@ IP_New_Centreon='68.183.128.166'
 
 
 # Testar conexao SSH
-`ssh root@$IP_New_Centreon "echo connected..."`
+`ssh root@$IP_New_Centreon "exit"`
 if [ $? -ne 0 ]
 then 
   echo "Erro na conexao SSH, verifique se a chave foi enviada para o Host..."
