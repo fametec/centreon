@@ -4,6 +4,8 @@ set -xv
 # Pos Install 
 # 1 Welcome to Centreon Setup
 #curl -d action="form_step1" -d next="Next" -d submit="Next" http://localhost/centreon/install/install.php
+curl http://localhost/centreon/install/steps/step.php?action=stepContent
+read
 curl http://localhost/centreon/install/steps/step.php?action=nextStep
 read
 
