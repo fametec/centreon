@@ -38,7 +38,7 @@ read
 # 6 Database information
 #curl -d action="form_step6" -d address="localhost" -d port="3306" -d root_password='' -d db_configuration="centreon" -d db_storage="centreon_storage" -d db_user="centreon" -d db_password='q1w2Q!W@' -d db_password_confirm='q1w2Q!W@' -d next="Next" http://localhost/centreon/install/install.php
 #curl -d address='localhost' -d port='3306' -d root_password='' -d db_configuration='centreon' -d db_storage='centreon_storage' -d db_user='centreon' -d db_password='q1w2Q!W@' -d db_passwordd_confirm='q1w2Q!W@' http://localhost/centreon/install/steps/process/process_step6.php
-curl -d address='localhost' -d port='3306' --form root_password='' -d db_configuration='centreon' -d db_storage='centreon_storage' -d db_user='centreon' -d db_password='q1w2Q!W@' -d db_password_confirm='q1w2Q!W@' http://localhost/centreon/install/steps/process/process_step6.php
+curl -d address='localhost' -d port='3306' -d db_configuration='centreon' -d db_storage='centreon_storage' -d db_user='centreon' -d db_password='q1w2Q!W@' -d db_password_confirm='q1w2Q!W@' http://localhost/centreon/install/steps/process/process_step6.php
 read
 curl http://localhost/centreon/install/steps/step.php?action=nextStep
 read
