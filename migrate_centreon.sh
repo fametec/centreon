@@ -32,9 +32,11 @@ rsync -avz /var/spool/centreon/.ssh root@$IP_New_Centreon:/var/spool/centreon
 
 
 # Dump Database
-mysqldump --skip-add-drop-database --all-databases > /tmp/dump.sql
-rsync -avz /tmp/dump.sql root@$IP_New_Centreon:/tmp
-ssh root@root@$IP_New_Centreon "mysql < /tmp/dump.sql"
+mysqldump --skip-add-drop-database --databases centreon > /tmp/dump_centreon.sql
+rsync -avz /tmp/dump_centreon.sql root@$IP_New_Centreon:/tmp
+ssh root@root@$IP_New_Centreon "mysql < /tmp/dump_centreon.sql"
+
+exit
 
 # Stop mysqld
 #ssh root@$IP_New_Centreon "service mysql stop"
