@@ -90,6 +90,13 @@ systemctl start snmpd
 systemctl start snmptrapd
 
 
+# Plugins
+yum -y install nagios-plugins-all centreon-plugin*
+
+# Widgets
+yum -y install centreon-widget*
+
+
 
 # Pos Install 
 # 1 Welcome to Centreon Setup
