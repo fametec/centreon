@@ -54,7 +54,8 @@ fi
 #systemctl start mysqld
 
 # Upgrading Centreon
-ssh root@$IP_New_Centreon "mv /usr/share/centreon/installDir/$(ssh root@$IP_New_Centreon -c 'ls -1 /usr/share/centreon/installDir') /usr/share/centreon/www/install"
+DI=`ssh root@IP_New_Centreon -c "ls -1 /usr/share/centreon/installDir"`
+ssh root@$IP_New_Centreon "mv /usr/share/centreon/installDir/$(DI) /usr/share/centreon/www/install"
 
 # Fonte: 
 # https://documentation.centreon.com/docs/centreon/en/latest/migration/upgradetoCentreon18.10.html
