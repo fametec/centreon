@@ -43,11 +43,11 @@ ssh root@root@$IP_New_Centreon "mysql < /tmp/dump.sql"
 #rsync -avz /var/lib/mysql/ root@$IP_New_Centreon:/var/lib/mysql/
 
 # If you migrate your DMBS from 5.x to 10.x, it’s necessary to execute this command on the new server :
-#MVER=`ssh root@$IP_New_Centreon "mysqld -V | grep Ver | cut -d ' ' -f 4 | cut -d . -f 1"`
-#if [ $MVER -ne 5 ]
-#then
-#  ssh root@$IP_New_Centreon "mysql_upgrade"
-#fi
+MVER=`ssh root@$IP_New_Centreon "mysqld -V | grep Ver | cut -d ' ' -f 4 | cut -d . -f 1"`
+if [ $MVER -ne 5 ]
+then
+  ssh root@$IP_New_Centreon "mysql_upgrade"
+fi
 
 
 # Start the mysqld process on the new server:
@@ -61,6 +61,10 @@ EOF
 
 rsync -avz /tmp/script1.sh root@$IP_New_Centreon:/tmp
 ssh root@$IP_New_Centreon "sh /tmp/script1.sh"
+
+
+
+ssh root@root@$IP_New_Centreon "mysql -v < /tmp/dump.sql"
 
 # Fonte: 
 # https://documentation.centreon.com/docs/centreon/en/latest/migration/upgradetoCentreon18.10.html
