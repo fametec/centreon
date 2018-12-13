@@ -63,20 +63,19 @@ if [ $MVER -ne 5 ]
 then
   ssh root@$IP_New_Centreon "mysql_upgrade"
 fi
-read
 
 # Start the mysqld process on the new server:
 #systemctl start mysqld
 
 # Upgrading Centreon
-cat << EOF >> /tmp/script2.sh
-DIR=\$(ls -1 /usr/share/centreon/installDir)
-mv /usr/share/centreon/installDir/\$DIR/ /usr/share/centreon/www/install
-EOF
+#cat << EOF >> /tmp/script2.sh
+#DIR=\$(ls -1 /usr/share/centreon/installDir)
+#mv /usr/share/centreon/installDir/\$DIR/ /usr/share/centreon/www/install
+#EOF
 
 
-rsync -avz /tmp/script2.sh root@$IP_New_Centreon:/tmp
-ssh root@$IP_New_Centreon "sh /tmp/script2.sh"
+#rsync -avz /tmp/script2.sh root@$IP_New_Centreon:/tmp
+#ssh root@$IP_New_Centreon "sh /tmp/script2.sh"
 
 # Fonte: 
 # https://documentation.centreon.com/docs/centreon/en/latest/migration/upgradetoCentreon18.10.html
