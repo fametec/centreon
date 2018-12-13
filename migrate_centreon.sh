@@ -4,7 +4,7 @@
 # 
 #
 
-IP_New_Centreon='209.97.181.239'
+IP_New_Centreon='45.55.52.14'
 
 
 # Testar conexao SSH
@@ -31,7 +31,7 @@ rsync -avz /var/spool/centreon/.ssh root@$IP_New_Centreon:/var/spool/centreon
 
 
 # Dump Database
-mysqldump --add-drop-database --all-databases > /tmp/dump.sql
+mysqldump --skip-add-drop-database --all-databases > /tmp/dump.sql
 rsync -avz /tmp/dump.sql root@$IP_New_Centreon:/tmp
 ssh root@root@$IP_New_Centreon "mysql < /tmp/dump.sql"
 
