@@ -72,8 +72,6 @@ fi
 #DIR=\$(ls -1 /usr/share/centreon/installDir)
 #mv /usr/share/centreon/installDir/\$DIR/ /usr/share/centreon/www/install
 #EOF
-
-
 #rsync -avz /tmp/script2.sh root@$IP_New_Centreon:/tmp
 #ssh root@$IP_New_Centreon "sh /tmp/script2.sh"
 
