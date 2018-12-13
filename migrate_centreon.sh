@@ -43,12 +43,12 @@ rsync -avz /tmp/dump_centreon_storage.sql root@$IP_New_Centreon:/tmp
 cat <<EOF >> /tmp/script1.sh
 #!/bin/bash
 #Restore databases
-mysql -v < /tmp/dump_centreon.sql
-mysql -v < /tmp/dump_centreon_storage.sql
+mysql < /tmp/dump_centreon.sql
+mysql < /tmp/dump_centreon_storage.sql
 EOF
 
 rsync -avz /tmp/script1.sh root@$IP_New_Centreon:/tmp
-ssh root@$IP_New_Centreon "sh /tmp/script1.sh"
+ssh root@$IP_New_Centreon "bash /tmp/script1.sh"
 
 
 # Stop mysqld
@@ -68,12 +68,12 @@ fi
 #systemctl start mysqld
 
 # Upgrading Centreon
-#cat << EOF >> /tmp/script2.sh
-#DIR=\$(ls -1 /usr/share/centreon/installDir)
-#mv /usr/share/centreon/installDir/\$DIR/ /usr/share/centreon/www/install
-#EOF
-#rsync -avz /tmp/script2.sh root@$IP_New_Centreon:/tmp
-#ssh root@$IP_New_Centreon "sh /tmp/script2.sh"
+cat << EOF >> /tmp/script2.sh
+DIR=\$(ls -1 /usr/share/centreon/installDir/)
+mv /usr/share/centreon/installDir/\$DIR/ /usr/share/centreon/www/install
+EOF
+rsync -avz /tmp/script2.sh root@$IP_New_Centreon:/tmp
+ssh root@$IP_New_Centreon "bash /tmp/script2.sh"
 
 # Fonte: 
 # https://documentation.centreon.com/docs/centreon/en/latest/migration/upgradetoCentreon18.10.html
