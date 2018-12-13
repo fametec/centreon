@@ -31,12 +31,16 @@ rsync -avz /var/spool/centreon/.ssh root@$IP_New_Centreon:/var/spool/centreon
 #rsync -avz /usr/lib/centreon/plugins root@$IP_Nes_Centreon:/usr/lib/centreon
 
 
-# Dump Database
+## Dump Database
 mysqldump --skip-add-drop-database --databases centreon > /tmp/dump_centreon.sql
 rsync -avz /tmp/dump_centreon.sql root@$IP_New_Centreon:/tmp
 ssh root@root@$IP_New_Centreon "mysql < /tmp/dump_centreon.sql"
+read
 
-exit
+mysqldump --skip-add-drop-database --databases centreon_storage > /tmp/dump_centreon_storage.sql
+rsync -avz /tmp/dump_centreon_storage.sql root@$IP_New_Centreon:/tmp
+ssh root@root@$IP_New_Centreon "mysql < /tmp/dump_centreon_storage.sql"
+read
 
 # Stop mysqld
 #ssh root@$IP_New_Centreon "service mysql stop"
@@ -50,7 +54,7 @@ if [ $MVER -ne 5 ]
 then
   ssh root@$IP_New_Centreon "mysql_upgrade"
 fi
-
+read
 
 # Start the mysqld process on the new server:
 #systemctl start mysqld
