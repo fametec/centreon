@@ -1,5 +1,6 @@
 #!/bin/bash
 #
+set -xv
 # Migrar Centreon 18.10 para outro Host
 # 
 #
