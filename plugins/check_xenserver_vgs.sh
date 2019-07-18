@@ -2,6 +2,16 @@
 
 #set -xv
 
+#-------------------------------------------------------------
+#
+# DESCRIPTION: Nagios plugin for checking the status of Volume Groups on Xenserver 6.5.
+#         
+#
+# AUTHOR:      Eduardo Fraga <eduardo@eftech.com.br> 
+#
+#-------------------------------------------------------------
+
+
 
 CRITICAL=10
 WARNING=20
