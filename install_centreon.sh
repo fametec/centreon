@@ -12,15 +12,15 @@ sed -i s/SELINUX=enforcing/SELINUX=permissive/g /etc/selinux/config
 
 
 # Criar Swap
-SWAP=`grep -v Filename /proc/swaps`
-if [ $SWAP -ne 0 ]
-then
-  dd if=/dev/zero of=/swap.raw bs=1M count=1024
-  chmod 0600 /swap.raw
-  mkswap /swap.raw
-  echo '/swap.raw swap swap defaults 0 0' >> /etc/fstab
-  swapon /swap.raw
-fi
+#SWAP=`grep -v Filename /proc/swaps`
+#if [ $SWAP -ne 0 ]
+#then
+#  dd if=/dev/zero of=/swap.raw bs=1M count=1024
+#  chmod 0600 /swap.raw
+#  mkswap /swap.raw
+#  echo '/swap.raw swap swap defaults 0 0' >> /etc/fstab
+#  swapon /swap.raw
+#fi
 
 
 # Software collections repository installation
@@ -28,8 +28,8 @@ yum -y install centos-release-scl
 
 
 # Centreon repository
-curl -sSL 'http://yum.centreon.com/standard/18.10/el7/stable/noarch/RPMS/centreon-release-18.10-2.el7.centos.noarch.rpm' -o /tmp/centreon-release-18.10-2.el7.centos.noarch.rpm
-yum -y install --nogpgcheck /tmp/centreon-release-18.10-2.el7.centos.noarch.rpm
+curl -sSL 'http://yum.centreon.com/standard/19.04/el7/stable/noarch/RPMS/centreon-release-19.04-1.el7.centos.noarch.rpm' -o /tmp/centreon-release-19.04-1.el7.centos.noarch.rpm
+yum -y install --nogpgcheck /tmp/centreon-release-19.04-1.el7.centos.noarch.rpm
 
 
 
@@ -64,7 +64,7 @@ echo "date.timezone = America/Fortaleza" > /etc/opt/rh/rh-php71/php.d/php-timezo
 
 
 # Restart httpd
-systemctl restart httpd
+systemctl restart httpd24-httpd
 
 
 # Disable firewalld
@@ -74,7 +74,7 @@ systemctl status firewalld
 
 
 # Launching services during system bootup
-systemctl enable httpd
+systemctl enable httpd24-httpd
 systemctl enable snmpd
 systemctl enable snmptrapd
 systemctl enable rh-php71-php-fpm
@@ -82,11 +82,12 @@ systemctl enable centcore
 systemctl enable centreontrapd
 systemctl enable cbd
 systemctl enable centengine
+systemctl enable centreon
 
 
 # Concluding the instalation
 systemctl start rh-php71-php-fpm
-systemctl start httpd
+systemctl start httpd24-httpd
 systemctl start mysqld
 systemctl start cbd
 systemctl start snmpd
