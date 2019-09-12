@@ -12,15 +12,15 @@ sed -i s/SELINUX=enforcing/SELINUX=permissive/g /etc/selinux/config
 
 
 # Criar Swap
-SWAP=`grep -v Filename /proc/swaps`
-if [ $SWAP -ne 0 ]
-then
-  dd if=/dev/zero of=/swap.raw bs=1M count=1024
-  chmod 0600 /swap.raw
-  mkswap /swap.raw
-  echo '/swap.raw swap swap defaults 0 0' >> /etc/fstab
-  swapon /swap.raw
-fi
+#SWAP=`grep -v Filename /proc/swaps`
+#if [ $SWAP -ne 0 ]
+#then
+#  dd if=/dev/zero of=/swap.raw bs=1M count=1024
+#  chmod 0600 /swap.raw
+#  mkswap /swap.raw
+#  echo '/swap.raw swap swap defaults 0 0' >> /etc/fstab
+#  swapon /swap.raw
+#fi
 
 
 # Software collections repository installation
