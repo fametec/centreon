@@ -28,8 +28,8 @@ yum -y install centos-release-scl
 
 
 # Centreon repository
-curl -sSL 'http://yum.centreon.com/standard/18.10/el7/stable/noarch/RPMS/centreon-release-18.10-2.el7.centos.noarch.rpm' -o /tmp/centreon-release-18.10-2.el7.centos.noarch.rpm
-yum -y install --nogpgcheck /tmp/centreon-release-18.10-2.el7.centos.noarch.rpm
+curl -sSL 'http://yum.centreon.com/standard/19.04/el7/stable/noarch/RPMS/centreon-release-19.04-1.el7.centos.noarch.rpm' -o /tmp/centreon-release-19.04-1.el7.centos.noarch.rpm
+yum -y install --nogpgcheck /tmp/centreon-release-19.04-1.el7.centos.noarch.rpm
 
 
 
