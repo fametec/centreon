@@ -64,7 +64,7 @@ echo "date.timezone = America/Fortaleza" > /etc/opt/rh/rh-php71/php.d/php-timezo
 
 
 # Restart httpd
-systemctl restart httpd
+systemctl restart httpd24-httpd
 
 
 # Disable firewalld
@@ -74,7 +74,7 @@ systemctl status firewalld
 
 
 # Launching services during system bootup
-systemctl enable httpd
+systemctl enable httpd24-httpd
 systemctl enable snmpd
 systemctl enable snmptrapd
 systemctl enable rh-php71-php-fpm
@@ -82,11 +82,12 @@ systemctl enable centcore
 systemctl enable centreontrapd
 systemctl enable cbd
 systemctl enable centengine
+systemctl enable centreon
 
 
 # Concluding the instalation
 systemctl start rh-php71-php-fpm
-systemctl start httpd
+systemctl start httpd24-httpd
 systemctl start mysqld
 systemctl start cbd
 systemctl start snmpd
