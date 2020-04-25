@@ -1,0 +1,47 @@
+version: "3.3"
+services:
+#
+# MARIADB
+#
+    mariadb-centreon:
+        build: mariadb/. 
+        image: fametec/mariadb-centreon:latest
+        restart: unless-stopped
+        # volumes: 
+        #   - mariadb-centreon-volume:/var/lib/mysql:rw
+        environment: 
+          MYSQL_DATABASE: centreon
+          MYSQL_USER: centreon
+          MYSQL_PASSWORD: centreon 
+          MYSQL_ROOT_PASSWORD: centreon
+        ports: 
+          - "3306:3306"
+        networks: 
+          - centreon-backend
+#
+# GLPI
+#
+    centreon: 
+        build: .
+        image: fametec/centreon:latest
+        restart: unless-stopped
+        depends_on: 
+          - mariadb-centreon
+        ports: 
+          - "80:80"
+          - "2222:22"
+        networks: 
+          - centreon-frontend
+          - centreon-backend
+#
+#
+# VOLUMES
+#
+# volumes: 
+#  mariadb-centreon-volume: 
+#
+# NETWORKS
+#
+networks: 
+  centreon-frontend: 
+  centreon-backend:
