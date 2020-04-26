@@ -31,6 +31,7 @@ RUN { \
         echo 'CENTREON   ALL = NOPASSWD: /usr/bin/supervisorctl' ; \
     } >> /etc/sudoers.d/centreon-supervisor
 
+RUN yum -y clean all && rm -rf /var/cache/yum
 
 EXPOSE 22
 
