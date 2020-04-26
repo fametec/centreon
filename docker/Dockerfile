@@ -55,10 +55,12 @@ RUN yum -y install git expect \
 		packaging/packages/perl-Hash-Merge-0.300-1.el7.noarch.rpm \
 		packaging/packages/perl-Clone-Choose-0.010-1.el7.noarch.rpm && \
 	sed -i -e /more/d install.sh
-
+	
 COPY scripts/script.exp /centreon-gorgone/script.exp
 
 RUN cd /centreon-gorgone && ./script.exp
+
+RUN yum -y clean all && rm -rf /var/cache/yum
 
 EXPOSE 22/TCP 80/TCP 162/UDP
 
