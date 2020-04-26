@@ -1,26 +1,14 @@
-[unix_http_server]
-file=/var/run/supervisor.sock   ; the path to the socket file
-
 [supervisord]
 logfile=/var/log/supervisord.log
 loglevel=debug
 pidfile=/var/run/supervisord.pid
 nodaemon=true
-logfile_backups=10  
-logfile_maxbytes=50MB  
 
-
-[rpcinterface:supervisor]
-supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface
-
+[unix_http_server]
+file=%(here)s/supervisor.sock
 
 [supervisorctl]
-serverurl=unix:///var/run/supervisor.sock ; use a unix:// URL  for a unix socket
-;serverurl=http://127.0.0.1:9001 ; use an http:// url to specify an inet socket
-;username=chris              ; should be same as in [*_http_server] if set
-;password=123                ; should be same as in [*_http_server] if set
-;prompt=mysupervisor         ; cmd line prompt (default "supervisor")
-;history_file=~/.sc_history  ; use readline history if available
+serverurl=unix://%(here)s/supervisor.sock
 
 
 
@@ -59,7 +47,6 @@ autorestart=true
 [program:centengine]
 command=/usr/sbin/centengine /etc/centreon-engine/centengine.cfg
 priority=70
-process_name=centengine
 user=centreon-engine
 autorestart=true
 
@@ -88,13 +75,11 @@ autorestart=true
 [program:centcore]
 command=/usr/share/centreon/bin/centcore --logfile=/var/log/centreon/centcore.log --severity=error --config=/etc/centreon/conf.pm
 priority=70
-process_name=centcore
 user=centreon
 autorestart=true
 
 [program:snmpd]
-command=/usr/sbin/snmpd -f -LS0-6d -Lf /dev/null -p /var/run/snmpd.pid
-process_name=snmpd
+command=/usr/sbin/snmpd -LS0-6d -Lf /dev/null -p /var/run/snmpd.pid
 priority=50
 autorestart=true
 
@@ -108,25 +93,5 @@ user=centreon
 command=/usr/sbin/snmptrapd -Lsd -f
 priority=70
 autorestart=true
-
-
-[program:gorgoned]
-command=/usr/bin/perl /usr/bin/gorgoned --config=/etc/centreon-gorgone/config.yaml --logfile=/var/log/centreon-gorgone/gorgoned.log --severity=info
-user=centreon-gorgone
-autorestart=true
-priority=70
-
-
-[program:crond]
-command=/usr/sbin/crond -s -x bit -n
-autorestart=true
-priority=70
-
-
-[program:ntpd]
-command=/usr/sbin/ntpd 
-autorestart=true
-priority=70
-process_name=ntpd
 
 

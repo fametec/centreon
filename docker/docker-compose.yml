@@ -19,11 +19,9 @@ services:
         networks: 
           - centreon-backend
 #
-# GLPI
-#
     centreon: 
         build: .
-        image: fametec/centreon:latest
+        image: fametec/centreon:19.10
         restart: unless-stopped
         depends_on: 
           - mariadb-centreon
@@ -33,6 +31,20 @@ services:
         networks: 
           - centreon-frontend
           - centreon-backend
+#
+    centreon-poller:
+        build: poller/.
+        image: fametec/centreon-poller:19.10
+        restart: unless-stopped
+        depends_on: 
+          - mariadb-centreon
+          - centreon
+        networks: 
+          - centreon-frontend
+          - centreon-backend
+        ports: 
+          - "2223:22"
+            
 #
 #
 # VOLUMES

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ $2 == "reload" ]
+then
+  /usr/bin/supervisorctl restart $1
+else
+  /usr/bin/supervisorctl $2 $1
+fi

@@ -1,0 +1,30 @@
+FROM centos:8
+
+RUN dnf -y update
+
+RUN dnf -y install http://yum-1.centreon.com/standard/20.04/el8/stable/noarch/RPMS/centreon-release-20.04-1.el8.noarch.rpm
+
+# RUN dnf -y install centreon-poller-centreon-engine
+
+RUN dnf -y install centreon-engine centreon-engine-extcommands centreon-clib
+
+RUN dnf -y install epel-release dnf-plugins-core && \
+	dnf config-manager --set-enabled PowerTools
+
+RUN dnf -y install nagios-plugins-all
+
+#RUN dnf -y install centreon-plugin* centreon-widget*
+
+RUN dnf -y install openssh openssh-server openssh-clients && \
+	mkdir -p /var/run/sshd && \
+	echo 'root:centreon' | chpasswd && \
+	sed -i 's/^#PermitRootLogin/PermitRootLogin/g' /etc/ssh/sshd_config
+
+RUN dnf -y install python3-pip && pip3 install supervisor
+
+ADD scripts/supervisord.conf /etc/supervisord.conf
+
+EXPOSE 22 80
+
+CMD ["/usr/bin/supervisord"]
+
